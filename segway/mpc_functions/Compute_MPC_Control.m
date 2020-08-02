@@ -1,4 +1,4 @@
-function [u_mpc] = Control_MPC(A, B)
+function [u_mpc] = Compute_MPC_Control(A,B)
 %CONTROL_MPC - This function computes the Model Predictive Control input
 %given a linear plant model
 

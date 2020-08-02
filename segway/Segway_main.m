@@ -1,8 +1,10 @@
-% Top level script for running the Segway model
-% 
-% In the file Segway_ODE45, you can select to simulate a 
-% nonlinear model or a linear model
-%
+%% Segway_main - Top level script for running the Segway model
+%   In the file Segway_simulate, you can select to simulate a 
+%   nonlinear model or a linear model
+
+%% Add necessary directories to path
+addpath(genpath('segway_functions'));
+addpath(genpath('mpc_functions'));
 
 %% Set Initial Conditon & Simulate
 x0 = [0;10;0;0] ; %[phi, theta, dphi/dt, dtheta/dt]
