@@ -1,6 +1,9 @@
 %% Segway_main - Top level script for running the Segway model
 %   In the file Segway_simulate, you can select to simulate a 
 %   nonlinear model or a linear model
+%   
+%   phi = lever angle
+%   theta = wheel angle
 
 %% Add necessary directories to path
 addpath(genpath('segway_functions'));

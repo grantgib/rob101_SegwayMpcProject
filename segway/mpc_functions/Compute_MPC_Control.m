@@ -11,10 +11,12 @@ Ts = 0.1;
 [A_d, B_d] = Discretize_Dynamics(dyn_struct,Ts);
 
 %% Formulate matrices for Quadratic Program Solver
-[H, L, G, W, T, IMPC] = Form_QP_Matrices(A_d, B_d, Q, R, P, xlim, ulim, N, slackPenalty);
+[H, L, G, W, T, IMPC] = Form_QP_Matrices(A_d, B_d, Q, R, P, xlim, ulim, N);
 
 %% Solve QP - control input sequence solution
-[U, lam] = Solve_QP(H, L, G, W, T, IMPC);
+% Minimize 1/2*U^T H U + q^{\rm T} U subject to G U <= W +T*x_0 = Wtilde
+% where q = L*x_0
+[U, lam] = Solve_QP(H,q,G,Wtilde,lam0,maxIter);
 
 %% Apply first control input in the solution sequence
 u_mpc = U(:,1);

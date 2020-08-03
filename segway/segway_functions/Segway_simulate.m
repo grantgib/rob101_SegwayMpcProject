@@ -24,7 +24,7 @@ end
 refine=4;
 RelTol = 10^-7;
 AbsTol = 10^-8;
-options = odeset('Refine',refine, 'RelTol',RelTol,'AbsTol',AbsTol);
+options = odeset('Refine',refine,'RelTol',RelTol,'AbsTol',AbsTol);
 t_start=0;
 params = struct('K',            K,...
                 'sim_type',     sim_type,...
