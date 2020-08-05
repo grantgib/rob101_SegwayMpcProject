@@ -5,6 +5,7 @@ function [H, L, G, W, T, IMPC] = Form_QP_Matrices(A, B, Q, R, P, xlim, ulim, N)
 % The matrix IMPC extracts the first control move, u_MPC=IMPC*U
 % N is the horizon,xlim, ulim are limits on x and u910nx = size(A,1);
 nu = size(B,2);
+nx = size(A,2);
 Qbar = [];
 Rbar = [];
 S = zeros(nx*(N),nu*(N));
