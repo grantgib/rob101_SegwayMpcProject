@@ -16,16 +16,18 @@ addpath(genpath('segway_functions'));
 addpath(genpath('mpc_functions'));
 
 %% Set Initial Conditon & Simulate
-x0 = [0;10;0;0] ; % Initial condition
-t_end = 25;       % Time to simulate 
-[t_sol, x_sol] = Segway_simulate(t_end,x0);
+x0 = [0;10;0;0] ; % x = [phi, theta, dphi/dt, dtheta/dt]
+t_end = 25;
+[tout, xout] = Segway_simulate(t_end,x0);
 
 %% Plot State/Output variables
-Segway_plot(t_sol,x_sol);
+Segway_plot(tout,xout);
 
 %% Animation
-animation_speed = 1;
-Segway_anim(t_sol,x_sol(:,1),x_sol(:,2),animation_speed);
+Segway_anim(tout,xout(:,1),xout(:,2));
+% Segway_anim(tout,xout(:,1),xout(:,2),.01);    % animate in slow motion
+
+
 
 
 

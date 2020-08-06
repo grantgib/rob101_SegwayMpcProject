@@ -49,11 +49,6 @@ H = 2*Htemp;    % Because of original cost function derivation
 L = 2*Ltemp;
 
 Hsym = (H+H')/2;
-if norm(Hsym - H) > 1e-5
-    disp('H not symmetric, check your formulation');
-else
-    H = Hsym;
-end
-    
+if 
 end
 

@@ -20,11 +20,11 @@ dyn_struct = struct('A_c',  A,...
 Q = diag([1 1 100 1]);
 R = 1;
 [~,P] = dlqr(A_d,B_d,Q,R);
-N = 40;
-xlim.max = inf*ones(1,4);
+N = 5;
+xlim.max = [inf, inf, inf, inf];
 xlim.min = -xlim.max;
 ulim.max = inf;
-ulim.min = -inf;
+ulim.min = -ulim.max;
 [H, L, G, W, T, IMPC] = Form_QP_Matrices(A_d, B_d, Q, R, P, xlim, ulim, N);
 
 %% Pole placement and LQR for Linear State Feedback Control (I think we can get rid of this eventually)

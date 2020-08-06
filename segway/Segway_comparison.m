@@ -1,5 +1,4 @@
 % Segway Comparison
-
 %% Load data
 clear;
 LMPC_data = load('saved_results/u_LMPC_dynamics_nonlinear.mat');
@@ -16,11 +15,7 @@ params_Linear = Linear_data.params;
 uout_LMPC = Extract_Torques(tout_LMPC,xout_LMPC,params_LMPC);
 uout_Linear = Extract_Torques(tout_Linear,xout_Linear,params_Linear);
 
-
 %% Comparison plot
-
-
-
 figure
 q_header = ["\phi","\theta","d \phi","d \theta"];
 for i = 1:4
@@ -36,7 +31,11 @@ plot(tout_Linear,uout_Linear); hold on;
 plot(tout_LMPC,uout_LMPC);
 legend('Linear', 'LMPC');
 title('Motor Torques [u]');
-    
+   
+
+
+
+
 
 
 
