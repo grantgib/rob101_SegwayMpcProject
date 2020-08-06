@@ -47,7 +47,7 @@ if nx < mx, x = x'; end
 if nh < mh, phi = phi'; end
 if ntheta < mtheta, theta = theta'; end
 
-[t,tmp] = even_sample(t, [x phi theta], 1/Ts);
+[t,tmp] = even_sample(t, [x phi theta], 10/Ts);
 x = tmp(:,1);
 phi = tmp(:,2);
 theta = tmp(:,3);

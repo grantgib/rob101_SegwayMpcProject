@@ -1,15 +1,14 @@
 function [A_d,B_d] = Discretize_Dynamics(dyn_struct, Ts)
-%DISCRETIZE_DYNAMICS - Discretize linear plant dynamics using zero order
-%hold method. The differential equation and corresponding difference 
-%equation are shown below.
+%% DISCRETIZE_DYNAMICS - Discretize linear plant dynamics
+%   Use zero order hold method. The differential equation and corresponding difference 
+%   equation are shown below.
 
-% Differential Equation:    dx/dt = A_c*x + B_c*u
-% Difference Equation:      x_{k+1} = A_d*x_{k} + B_d*u_{k}
+%   Differential Equation (ODE):    dx/dt = A_c*x + B_c*u
+%   Difference Equation:            x_{k+1} = A_d*x_{k} + B_d*u_{k}
 
 %% Extract Input Data
 A_c = dyn_struct.A_c;   % Continuous-time state matrix
 B_c = dyn_struct.B_c;   % Continuous-time input matrix
-
 dim_state = size(dyn_struct.A_c,1); % dimension of state variables
 
 % Output matrix
