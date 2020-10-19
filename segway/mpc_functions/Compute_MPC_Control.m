@@ -5,7 +5,7 @@ function [u_mpc] = Compute_MPC_Control(params)
 %% Initialize variables
 x0 = params.x0;
 H = params.H;
-G = params.G;
+Aineq = params.G;
 L = params.L;
 W = params.W;
 T = params.T;
@@ -18,16 +18,15 @@ solver_type = "my_solver";  % my_solver, matlab_solver
 if solver_type == "my_solver"
     %% Use Dual projected gradient algorithm for QP solver
     q = L*x0;                   % Linear cost vector
-    Wtilde = W + T*x0;          % Inequality bound matrix
-    lam0 = ones(length(W),1);   % Dual variable initialization
-    [U, lambda] = Solve_QP_DualProjectedGradient(H,q,G,Wtilde,lam0);
+    Bineq = W + T*x0;          % Inequality bound matrix
+    [U, lambda] = Solve_QP_DualProjectedGradient(H,q,Aineq,Bineq,[],[],[],[]);
     
 elseif solver_type == "matlab_solver"
     %% QUADPROG Solution (Built-in Matlab solver)
     q = L*x0;
-    Wtilde = W + T*x0;
+    Bineq = W + T*x0;
     options = optimoptions(@quadprog,'Display','off');
-    [U,~,EXITFLAG] = quadprog(H,q,G,Wtilde,[],[],[],[],[],options);
+    [U,~,EXITFLAG] = quadprog(H,q,Aineq,Bineq,[],[],[],[],[],options);
     if EXITFLAG ~= 1
         disp('Invalid solution for some reason');
         pause;

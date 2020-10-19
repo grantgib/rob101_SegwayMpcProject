@@ -32,7 +32,6 @@ ulim = struct('max',    inf,...
 %   where q = L*x_0
 %   IMPC extracts the first control move, u_MPC = IMPC*U
 [H, L, G, W, T, IMPC] = Form_QP_Matrices(A_d, B_d, Q, R, Q_term, xlim, ulim, N);
-
 %% Forward Integration Settings
 options = odeset('Refine',4,'RelTol',1e-7,'AbsTol',1e-8);
 t_start = 0;
