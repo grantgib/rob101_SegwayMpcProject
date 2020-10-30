@@ -1,7 +1,7 @@
 % Test QP Code vs. quadprog
 
 %% Example 1
-clear;
+clear; clc;
 H = 2*[3,1;1,1];
 q = [1, 6]';
 A = [-2, -3;
@@ -23,5 +23,5 @@ Aeq = ones(1,3);
 beq = 1/2;
 Aineq = [];
 Bineq = [];
-x = quadprog(H,f,[],[],Aeq,beq,lb,ub)
+[x,~,~,~,xlam] = quadprog(H,f,[],[],Aeq,beq,lb,ub)
 [x_myQP,lam_myQP] = Solve_QP_DualProjectedGradient(H,f,Aineq,Bineq,Aeq,beq,lb,ub)

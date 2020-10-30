@@ -1,4 +1,4 @@
-function [U, slack_var] = Solve_QP_DualProjectedGradient(H,q,Aineq,Bineq,Aeq,Beq,lb,ub,maxIter,tol)
+function [U, slack_var] = Solve_QP_DualProjectedGradient(H,q,Aineq,Bineq,Aeq,Beq,lb,ub,maxIter,tol,slack_var_guess)
 %% Solve_QP_DualProjectedGradient - Implements type of QP solver
 %   Dual projected gradient algorithm for solving QP problem
 %   Original problem:
@@ -45,7 +45,12 @@ dim_lmd = length(W)-length(Beq);
 H_dual = (G/H)*G';                              % dual quadratic cost matrix
 q_dual = (G/H)*q + W;                           % dual linear cost vector
 H_dual_norm = norm(H_dual);                     % upper bound on eigenvalues of H_dual
-slack_var = ones(length(W),1);                  % initialize dual variable guess (greater than zero for all entries); slack_var=[lambda;p]; lambda-inequality slack var; p-equality slack var
+if nargin < 11
+    slack_var = ones(length(W),1);                  % initialize dual variable guess (greater than zero for all entries); slack_var=[lambda;p]; lambda-inequality slack var; p-equality slack var
+else
+    slack_var = slack_var_guess;
+end
+    
 dual_gradient = H_dual*slack_var + q_dual;      % gradient of dual cost function
 for k = 1:maxIter
     % iterate with gradient descent method. max is used to project the

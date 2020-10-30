@@ -23,7 +23,7 @@ function [U, slack_var] = Solve_QP_DualProjectedGradient(H,q,Aineq,Bineq,Aeq,Beq
 %           slack_var(1:length(lb)+length(ub)+length(Aineq))
 %
 if nargin < 9
-    maxIter = 4000;
+    maxIter = 10000;
     tol = 1e-6;
 end
 dim_U = size(H,2);

@@ -15,16 +15,16 @@ addpath(genpath('segway_functions'));
 addpath(genpath('mpc_functions'));
 
 %% Set Initial Conditon & Simulate
-x0 = [0;10;0;0] ; % Initial condition
-t_end = 25;       % Time to simulate 
-[t_sim,x_sim,params_sim] = Segway_simulate(t_end,x0);
+segprob = "vel";    % "pos" or "vel"
+t_end = 50;       % Time to simulate 
+[t_sim,x_sim,params_sim] = Segway_simulate(t_end,segprob);
 
 %% Plot State/Output variables
 Segway_plot(t_sim,x_sim,params_sim);
 
 %% Animation
-animation_speed = 1;
-Segway_anim(t_sim,x_sim(:,1),x_sim(:,2),animation_speed);
+% animation_speed = 1;
+% Segway_anim(t_sim,x_sim(:,1),x_sim(:,2),animation_speed);
 
 
 
