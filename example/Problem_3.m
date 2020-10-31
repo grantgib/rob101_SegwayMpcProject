@@ -116,7 +116,7 @@ end
 % save(name,'slack_var_guess');
 
 %% Plot trajectories
-Plot_Traj(t_traj,x_traj,u_traj);
+Plot_Traj(t_traj,x_traj,u_traj,prob3);
 
 %% Animation
 % Animation(x_traj,x_goal,tspan,dt);
@@ -188,38 +188,73 @@ bin = [X_max - M*x_init;
 end
 
 % Plot Trajectories
-function [] = Plot_Traj(t_traj,x_traj,u_traj)
-wd = 1;
-sz = 5;
+function [] = Plot_Traj(t_traj,x_traj,u_traj,prob3)
+wdline = 5;
+sz = 20;
+ft = 30;
 figure;
 subplot(131);
-scatter(t_traj,x_traj(1,:),sz,'LineWidth',wd);
-hold on; yline(5,'g','LineWidth',wd);
+scatter(t_traj,x_traj(1,:),sz);
+hold on; yline(5,'g','LineWidth',wdline);
+switch prob3
+    case 'a'
+    case 'b'
+    case 'c'
+        hold on; xline(1.5,'k','LineWidth',wdline/2);
+    case 'd'
+        for k = 1:9
+            hold on; xline(k*0.3,':k','LineWidth',wdline/5);
+        end
+end
 xlabel('t: time [sec]');
 ylabel('p: car position [m]');
 legend('Position Trajectory',...
        'Position Goal');
+set(gca,'FontSize',ft);
 
 subplot(132);
-scatter(t_traj,x_traj(2,:),sz,'LineWidth',wd);
-hold on; yline(6,'--r','LineWidth',wd);
-hold on; yline(0,'g','LineWidth',wd);
+scatter(t_traj,x_traj(2,:),sz);
+hold on; yline(6,'--r','LineWidth',wdline);
+hold on; yline(0,'g','LineWidth',wdline);
+switch prob3
+    case 'a'
+    case 'b'
+    case 'c'
+        hold on; xline(1.5,'k','LineWidth',wdline/2);
+    case 'd'
+        for k = 1:9
+            hold on; xline(k*0.3,':k','LineWidth',wdline/5);
+        end
+end
 xlabel('t: time [sec]');
 ylabel('v: car velocity [m/s]');
 legend('Velocity Trajectory',...
        'Max Velocity Bound',...
        'Velocity Goal');
+set(gca,'FontSize',ft);
 
 subplot(133);
-scatter(t_traj(1:end-1),u_traj,sz,'LineWidth',wd);
-hold on; yline(10,'--r','LineWidth',wd);
-hold on; yline(-10,'--r','LineWidth',wd);
-hold on; yline(0,'--k','LineWidth',wd);
+hold on; yline(10,'--r','LineWidth',2);
+hold on; yline(-10,'--r','LineWidth',2);
+hold on; scatter(t_traj(1:end-1),u_traj,sz);
+switch prob3
+    case 'a'
+    case 'b'
+    case 'c'
+        hold on; xline(1.5,'k','LineWidth',wdline/2);
+    case 'd'
+        for k = 1:9
+            hold on; xline(k*0.3,':k','LineWidth',wdline/5);
+        end
+    case 'e'
+        yline(0,'k','Linewidth',1);
+end
 xlabel('t: time [sec]');
 ylabel('u: car acceleration [m/s^2]');
-legend('Control Input (Acceleration) Trajectory',...
-       'Max Acceleration Bound',...
-       'Min Acceleration Bound');
+legend('Max Acceleration Bound',...
+       'Min Acceleration Bound',...
+       'Control Input (Acceleration) Trajectory');
+set(gca,'FontSize',ft);
 end
 
 function [] = Animation(x_traj,x_goal,tspan,dt)

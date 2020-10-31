@@ -5,10 +5,10 @@ u_sim = Extract_Torques(t_sim,x_sim,params);
 % absolute_segway_angular_velocity = [0 0 1 1]*x_sim';
 
 %% Plot settings
-font_title = 18;
-font_label = 16;
+font_title = 30;
+font_label = 30;
 line_width = 1;
-sz = 1;
+sz = 10;
 
 %% Plot state trajectories
 figure
