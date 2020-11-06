@@ -8,7 +8,6 @@ solver_type = "matlab_solver";  % my_solver, matlab_solver
 
 %% Compute QP Matrices
 [H,q,Ain,bin] = Compute_QP_Matrices(params);
-
 %% Solve QP - control input sequence solution
 % Minimize 1/2*U'*H*U + q'*U subject to Ain*U <= bin
 if solver_type == "my_solver"
@@ -47,7 +46,7 @@ x_init = params.x_init;
 dim_u = params.dim_u;
 
 % compute QP matrices
-H = S'*Qstate_bar*S + Qctrl_bar;
+H = S'*Qstate_bar*S + Qctrl_bar; H = (H + H')/2;
 q = (2*(M*x_init - X_goal)'*Qstate_bar*S)';
 Ain = [S;
        -S;
